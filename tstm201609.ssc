@@ -1,0 +1,178 @@
+//
+// Author: Allard Schipper
+// Version: 1.0
+// License: Public Domain
+// Name: The Sky this Month - September 2016
+// Description: The Sky this Month for the Recreational Astronomy Night at the Ontario Science Centre
+//
+
+include("common_objects.inc");
+core.goHome();
+core.setTimeRate(0);
+ConstellationMgr.setFlagLines(true);
+ConstellationMgr.setFlagLabels(true);
+ConstellationMgr.setFlagArt(false);
+LabelMgr.deleteAllLabels();
+label = LabelMgr.labelScreen("", 20, 20, false, 30, "#aaaaaa");
+LabelMgr.setLabelShow(label, true);
+// core.setGuiVisible(false);
+
+// sunsets
+LabelMgr.setLabelText(label, "Sunsets this month");
+
+StelMovementMgr.zoomTo (80,1);
+core.setDate("2016-09-14T20:00:00", "local");
+core.moveToAltAzi(20, 225, 3);
+core.wait(3);
+
+for (i=0; i<31; i++)
+{
+	core.setDate("+1 day");
+	labelText = core.getDate("local");
+	labelText = labelText.replace("T", "  "); 
+	LabelMgr.setLabelText(label, labelText);
+	core.wait(1);
+}
+
+
+
+// sunrises
+core.setDate("2016-09-14T06:30:00", "local");
+LabelMgr.setLabelText(label, "Sunrises this month");
+core.moveToAltAzi(20, 90, 3);
+core.wait(3);
+
+for (i=0; i<31; i++)
+{
+	core.setDate("+1 day");
+	labelText = core.getDate("local");
+	labelText = labelText.replace("T", "  "); 
+	LabelMgr.setLabelText(label, labelText);
+	core.wait(1);
+}
+
+// summer triangle
+StelMovementMgr.zoomTo (70,3);
+core.setDate("2016-09-28T21:00:00", "local");
+core.moveToAltAzi(70, 190, 3);
+LabelMgr.setLabelText(label, "Summer Triangle");
+core.wait(15);
+
+// zodiac constellations
+LabelMgr.setLabelText(label, "Constellations of the Zodiac");
+core.wait(3);
+LabelMgr.setLabelText(label, "");
+
+var zodiacConstellations = new Array("Sagittarius", "Capricornus", "Aquarius", "Pisces");
+
+for (i=0; i<zodiacConstellations.length; i++)
+{
+	ConstellationMgr.setFlagLines(false);
+	ConstellationMgr.setFlagLabels(false);
+	ConstellationMgr.setFlagArt(false);
+	objName = zodiacConstellations[i];
+	core.selectObjectByName(objName, true);
+	StelMovementMgr.autoZoomIn(6);
+	core.wait(1);
+	StelMovementMgr.zoomTo(40,8);
+	core.wait(3);
+	ConstellationMgr.setFlagLines(true);
+	core.wait(3);
+	ConstellationMgr.setFlagLabels(true);
+	core.wait(3);
+	ConstellationMgr.setFlagArt(true);
+	core.wait(6);
+}
+
+ConstellationMgr.setFlagLines(true);
+ConstellationMgr.setFlagLabels(true);
+ConstellationMgr.setFlagArt(false);
+
+// planets etc.
+core.goHome();
+LabelMgr.setLabelText(label, "Planets");
+core.wait(3);
+LabelMgr.setLabelText(label, "");
+
+var planets = new Array("Saturn", "Mars" , "Neptune", "Uranus");
+LabelMgr.setLabelText(label, "Planets");
+core.wait(4);
+LabelMgr.setLabelText(label, "");
+
+
+for (i=0; i<planets.length; i++)
+{
+	objName = planets[i];
+	core.selectObjectByName(objName, true);
+	StelMovementMgr.autoZoomIn(8);
+	core.wait(12);
+	StelMovementMgr.zoomTo (70,4);
+	core.wait(5);
+}
+
+
+// zodiacal light
+LabelMgr.setLabelText(label, "Zodiacal light, 9/28, 5 AM");
+core.wait(3);
+core.setDate("2016-09-29T05:00:00", "local");
+core.moveToAltAzi(20, 90, 3);
+// ZodiacalLight.draw();
+// ZodiacalLight.setFlagShow(true);
+// ZodiacalLight.setIntensity(7);
+core.wait(10);
+LabelMgr.setLabelText(label, "");
+
+// milky way constellations
+core.setDate("2016-09-28T21:00:00", "local");
+core.goHome();
+LabelMgr.setLabelText(label, "Milkyway constellations");
+core.wait(3);
+LabelMgr.setLabelText(label, "");
+
+var milkywayConstellations = new Array("Sagittarius", "Scutum", "Sagitta", "Vulpecula", "Cygnus", "Lacerta", "Cepheus", "Cassiopeia", "Camelopardalis", "Perseus");
+
+for (i=0; i<milkywayConstellations.length; i++)
+{
+	ConstellationMgr.setFlagLines(false);
+	ConstellationMgr.setFlagLabels(false);
+	ConstellationMgr.setFlagArt(false);
+	objName = milkywayConstellations[i];
+	core.selectObjectByName(objName, true);
+	StelMovementMgr.autoZoomIn(6);
+	core.wait(1);
+	StelMovementMgr.zoomTo(40,8);
+	core.wait(3);
+	ConstellationMgr.setFlagLines(true);
+	core.wait(3);
+	ConstellationMgr.setFlagLabels(true);
+	core.wait(3);
+	ConstellationMgr.setFlagArt(true);
+	core.wait(3);
+}
+
+ConstellationMgr.setFlagLines(true);
+ConstellationMgr.setFlagLabels(true);
+ConstellationMgr.setFlagArt(false);
+
+
+// deep sky
+core.goHome();
+core.setDate("2016-09-28T21:00:00", "local");
+LabelMgr.setLabelText(label, "Deep Sky");
+core.wait(3);
+LabelMgr.setLabelText(label, "");
+
+var deepsky = new Array("M13", "M10", "M12", "M8", "M20", "M21", "M23", "M25", "M17", "M16", "M11", "NGC6790", "5 lyr", "M57", "M56", "Albireo", "Crescent Nebula", "Veil Nebula", "M27", "NGC6822", "M31", "M33", "Mel 14", "Mirphak", "Algol");
+
+
+for (i=0; i<deepsky.length; i++)
+{
+	objName = deepsky[i];
+	core.selectObjectByName(objName, true);
+	StelMovementMgr.autoZoomIn(8);
+	core.wait(12);
+	StelMovementMgr.zoomTo (40,4);
+	core.wait(5);
+}
+
+// core.setGuiVisible(true);
